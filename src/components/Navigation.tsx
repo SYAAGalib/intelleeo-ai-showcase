@@ -29,7 +29,7 @@ export const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center ">
             <img 
-              src="/lovable-uploads/intelleeo_full_logo.png" 
+              src="/lovable-uploads/intelleeo_nav_logo.png" 
               alt="intelleeo" 
               className="h-8 w-auto"
             />
