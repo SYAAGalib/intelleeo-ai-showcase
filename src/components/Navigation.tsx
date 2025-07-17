@@ -33,9 +33,6 @@ export const Navigation = () => {
               alt="intelleeo" 
               className="h-8 w-auto"
             />
-            {/* <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              intelleeo
-            </span> */}
           </Link>
 
           {/* Desktop Navigation */}
