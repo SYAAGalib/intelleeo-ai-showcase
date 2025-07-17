@@ -46,7 +46,7 @@ export const projects: Project[] = [
     timeline: '4 months',
     techStack: ['React', 'TypeScript', 'Python', 'TensorFlow', 'PostgreSQL'],
     tags: ['AI', 'Web', 'Client'],
-    screenshot: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=1200&fit=crop',
+    screenshot: '/uploads/smart_analytics_dashboard.jpg',
     liveLink: 'https://smart-analytics.demo',
     aiHighlight: 'Machine learning models for predictive analytics and anomaly detection'
   },
