@@ -46,8 +46,8 @@ const Index = () => {
             className="text-center"
           >
             <Button size="lg" variant="outline" className="group" asChild>
-              <Link to="/technologies">
-                Explore Our Technologies
+              <Link to="/devnest">
+                Explore our DevNest
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
