@@ -10,7 +10,7 @@ export const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="/lovable-uploads/5a5569d4-63ed-464e-8209-bc18b48ed31c.png" 
+                src="/lovable-uploads/intelleeo_full_logo.png" 
                 alt="intelleeo" 
                 className="h-8 w-auto"
               />
