@@ -22,13 +22,13 @@ export const Footer = () => {
               AI Software Studio building intelligent solutions that bridge the gap between technology and human needs.
             </p>
             <div className="flex space-x-4">
-              <a href="https://github.com" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://github.com/SYAAGalib" className="text-muted-foreground hover:text-primary transition-colors">
                 <Github className="h-5 w-5" />
               </a>
-              <a href="https://twitter.com" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://twitter.com/SYAAGalib" className="text-muted-foreground hover:text-primary transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="https://linkedin.com" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://linkedin.com/in/SYAAGalib" className="text-muted-foreground hover:text-primary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
               <a href="mailto:hello@intelleeo.com" className="text-muted-foreground hover:text-primary transition-colors">
