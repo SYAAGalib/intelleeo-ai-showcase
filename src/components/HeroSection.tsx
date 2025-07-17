@@ -24,16 +24,24 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8"
           >
-            <Link to="/" className="flex items-center space-x-3">
-              <img
-              src="/lovable-uploads/intelleeo_nav_logo.png" 
+            <img 
+              src="/lovable-uploads/intelleeo_full_logo.png" 
               alt="intelleeo" 
-              className="h-8 w-auto"  
-              />
-            </Link>
+              className="h-20 w-auto mx-auto mb-4"
+            />
           </motion.div>
 
-
+          {/* Brand Name */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-6xl md:text-8xl font-bold mb-6"
+          >
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              intelleeo
+            </span>
+          </motion.h1>
 
           {/* Tagline */}
           <motion.h2

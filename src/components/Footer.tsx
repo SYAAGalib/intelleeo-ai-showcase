@@ -9,14 +9,14 @@ export const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <img 
-                src="/lovable-uploads/intelleeo_full_logo.png" 
-                alt="intelleeo" 
-                className="h-8 w-auto"
-              />
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                intelleeo
-              </span>
+              {/* Logo */}
+                          <Link to="/" className="flex items-center space-x-3">
+                            <img
+                            src="/lovable-uploads/intelleeo_nav_logo.png" 
+                            alt="intelleeo" 
+                            className="h-8 w-auto"  
+                            />
+                          </Link>
             </div>
             <p className="text-muted-foreground mb-4 max-w-md">
               AI Software Studio building intelligent solutions that bridge the gap between technology and human needs.
