@@ -30,7 +30,7 @@ export const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/lovable-uploads/intelleeo_nav_logo.png" 
+              src="/uploads/intelleeo_nav_logo.png" 
               alt="intelleeo" 
               className="h-8 w-auto"
             />

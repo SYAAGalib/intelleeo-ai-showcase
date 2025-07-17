@@ -62,7 +62,7 @@ export const projects: Project[] = [
     timeline: '5 months',
     techStack: ['React Native', 'Node.js', 'TensorFlow Lite', 'Firebase', 'HealthKit'],
     tags: ['AI', 'Mobile', 'Open Source'],
-    screenshot: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=1200&fit=crop',
+    screenshot: '/uploads/mobile_health_assistant.jpg',
     sourceCode: 'https://github.com/intelleeo/health-assistant',
     aiHighlight: 'On-device ML models for privacy-preserving health analysis'
   },

@@ -25,7 +25,7 @@ export const HeroSection = () => {
             className="mb-8"
           >
             <img 
-              src="/lovable-uploads/intelleeo_full_logo.png" 
+              src="/uploads/intelleeo_full_logo.png" 
               alt="intelleeo" 
               className="h-20 w-auto mx-auto mb-4"
             />
