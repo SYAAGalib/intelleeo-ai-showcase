@@ -9,6 +9,7 @@ import DevNest from "./pages/DevNest";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ProjectDetail from "./pages/ProjectDetail";
+import Technologies from "./pages/Technologies";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Layout />}>
             <Route index element={<Index />} />
             <Route path="devnest" element={<DevNest />} />
+            <Route path="technologies" element={<Technologies />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
             <Route path="projects/:slug" element={<ProjectDetail />} />
