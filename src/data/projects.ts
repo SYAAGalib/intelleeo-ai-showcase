@@ -46,7 +46,7 @@ export const projects: Project[] = [
     timeline: '4 months',
     techStack: ['React', 'TypeScript', 'Python', 'TensorFlow', 'PostgreSQL'],
     tags: ['AI', 'Web', 'Client'],
-    screenshot: '/uploads/smart_analytics_dashboard.jpg',
+    screenshot: '/uploads/smart_analytics_dashboard.webp',
     liveLink: 'https://smart-analytics.demo',
     aiHighlight: 'Machine learning models for predictive analytics and anomaly detection'
   },
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     timeline: '5 months',
     techStack: ['React Native', 'Node.js', 'TensorFlow Lite', 'Firebase', 'HealthKit'],
     tags: ['AI', 'Mobile', 'Open Source'],
-    screenshot: '/uploads/mobile_health_assistant.jpg',
+    screenshot: '/uploads/mobile_health_assistant.webp',
     sourceCode: 'https://github.com/intelleeo/health-assistant',
     aiHighlight: 'On-device ML models for privacy-preserving health analysis'
   },
