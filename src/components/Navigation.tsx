@@ -27,7 +27,7 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center ">
+          <Link to="/" className="flex items-center space-x-3">
             <img 
               src="/lovable-uploads/intelleeo_nav_logo.png" 
               alt="intelleeo" 
