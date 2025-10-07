@@ -14,7 +14,7 @@ export const Footer = () => {
                             <img
                             src="/uploads/intelleeo_nav_logo.png" 
                             alt="intelleeo" 
-                            className="h-8 w-auto"  
+                            className="h-12 w-auto"  
                             />
                           </Link>
             </div>
@@ -62,7 +62,7 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-          <p>&copy; 2025 intelleeo. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} intelleeo. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -6,7 +6,7 @@ import { NeuralBackground } from './NeuralBackground';
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <NeuralBackground />
       
@@ -24,11 +24,11 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8"
           >
-            <img 
+            {/* <img 
               src="/uploads/intelleeo_full_logo.png" 
               alt="intelleeo" 
               className="h-20 w-auto mx-auto mb-4"
-            />
+            /> */}
           </motion.div>
 
           {/* Brand Name */}

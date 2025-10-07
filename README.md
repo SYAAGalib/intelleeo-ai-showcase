@@ -1,22 +1,14 @@
-# Welcome to your Lovable project
+# intelleeo AI Showcase
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/66db3b53-62c0-4389-aead-0704d47b9310
+A modern, professional portfolio website for intelleeo, an AI Software Studio showcasing intelligent solutions that bridge technology and human needs.
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/66db3b53-62c0-4389-aead-0704d47b9310) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Clone this repository and work locally using your preferred development environment.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +54,11 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/66db3b53-62c0-4389-aead-0704d47b9310) and click on Share -> Publish.
+This project can be deployed to any static hosting service like Vercel, Netlify, or GitHub Pages:
 
-## Can I connect a custom domain to my Lovable project?
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder to your hosting service
 
-Yes, you can!
+## Custom Domain Setup
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+You can connect a custom domain through your hosting provider's dashboard. Each provider has different steps for custom domain configuration.

@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { Mail, MapPin, Phone, Clock, Send, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -40,13 +41,13 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      content: '+880 1946 303020',
+      link: 'tel:+8801946303020'
     },
     {
       icon: MapPin,
       title: 'Location',
-      content: 'San Francisco, CA',
+      content: 'Khulna, Bangladesh',
       link: null
     },
     {
@@ -68,27 +69,65 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // EmailJS configuration
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    setIsLoading(false);
-    setIsSubmitted(true);
-    
-    toast({
-      title: "Message sent successfully!",
-      description: "We'll get back to you within 24 hours.",
-    });
+      // Check if EmailJS is configured
+      if (!serviceId || !templateId || !publicKey) {
+        console.warn('EmailJS not configured. Please add credentials to .env file');
+        // Fallback to simulation for development
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        throw new Error('Email service not configured. Please contact us directly at hello@intelleeo.com');
+      }
 
-    // Reset form after a delay
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        projectType: '',
-        message: ''
+      // Send email via EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        project_type: formData.projectType || 'Not specified',
+        message: formData.message,
+        to_email: 'hello@intelleeo.com', // Your email address
+      };
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      );
+
+      setIsLoading(false);
+      setIsSubmitted(true);
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you within 24 hours.",
       });
-    }, 3000);
+
+      // Reset form after a delay
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          projectType: '',
+          message: ''
+        });
+      }, 3000);
+
+    } catch (error) {
+      setIsLoading(false);
+      console.error('Email send error:', error);
+      
+      toast({
+        title: "Failed to send message",
+        description: error instanceof Error ? error.message : "Please try again or contact us directly at hello@intelleeo.com",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
