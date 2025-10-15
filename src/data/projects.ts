@@ -62,7 +62,7 @@ export const projects: Project[] = [
     timeline: '6 months',
     techStack: ['Django', 'React', 'PostgreSQL', 'Docker', 'REST APIs', 'VPS'],
     tags: ['Web', 'Client'],
-    screenshot: '/public/uploads/DevNest/citizen-lab.jpg',
+    screenshot: '/uploads/DevNest/citizen-lab.jpg',
     liveLink: 'https://www.citizenlabbd.com'
   },
   {
@@ -77,7 +77,7 @@ export const projects: Project[] = [
     timeline: '6 months',
     techStack: ['React', 'Laravel', 'MySQL', 'Tailwind', 'Payment API', 'VPS Hosting'],
     tags: ['Web', 'Client'],
-    screenshot: '/public/uploads/DevNest/mariyamtraders.jpg',
+    screenshot: '/uploads/DevNest/mariyamtraders.jpg',
     liveLink: 'http://mariyamtraders.com',
     aiHighlight: 'Real-time inventory sync, smart product recommendations, and optimized mobile UX for low-bandwidth environments'
   },
@@ -93,7 +93,7 @@ export const projects: Project[] = [
     timeline: '4 months',
     techStack: ['React', 'TypeScript', 'Docker', 'Kubernetes', 'OpenAI Codex'],
     tags: ['AI', 'Web', 'Open Source'],
-    screenshot: '/public/uploads/DevNest/auto-glide-hub.jpg',
+    screenshot: '/uploads/DevNest/auto-glide-hub.jpg',
     liveLink: 'https://auto-glide-hub.vercel.app',
     sourceCode: 'https://github.com/intelleeo/auto-glide-hub',
     aiHighlight: 'GPT-powered automated conversational agents for customer support'
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     timeline: '5 months',
     techStack: ['Vue.js', 'Laravel', 'MySQL', 'OpenAI', 'LangChain', 'Meilisearch', 'Redis', 'Social APIs'],
     tags: ['AI', 'Web', 'Client'],
-    screenshot: '/public/uploads/DevNest/globalcronicle.png',
+    screenshot: '/uploads/DevNest/globalcronicle.png',
     liveLink: 'https://globalcronicle.vercel.app/',
     aiHighlight: 'Real-time ingestion + RAG-backed fact-checking, multilingual summarization, and personalized ranking with contextual bandits and reader vectors'
   }

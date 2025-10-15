@@ -31,7 +31,7 @@ export const Footer = () => {
               <a href="https://linkedin.com/in/SYAAGalib" className="text-muted-foreground hover:text-primary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="mailto:hello@intelleeo.com" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="mailto:intelleeo.inteligence@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>

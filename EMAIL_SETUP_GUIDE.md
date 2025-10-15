@@ -45,7 +45,7 @@ EmailJS allows you to send emails directly from the browser without a backend se
      * `{{from_email}}` - Sender's email
      * `{{project_type}}` - Project type selected
      * `{{message}}` - Message content
-     * `{{to_email}}` - Your email (hello@intelleeo.com)
+     * `{{to_email}}` - Your email (intelleeo.inteligence@gmail.com)
 
    - Note your **Template ID**
 
@@ -142,7 +142,7 @@ For more control, you can create a backend API endpoint.
 
      const mailOptions = {
        from: email,
-       to: 'hello@intelleeo.com',
+       to: 'intelleeo.inteligence@gmail.com',
        subject: `New Contact Form Submission from ${name}`,
        html: `
          <h2>New Contact Form Submission</h2>
@@ -231,4 +231,4 @@ That's it! Your contact form will start sending real emails. 📧
 If you need help setting this up, feel free to:
 - Check EmailJS documentation: https://www.emailjs.com/docs/
 - Contact me for assistance
-- Use the fallback email: hello@intelleeo.com
+- Use the fallback email: intelleeo.inteligence@gmail.com

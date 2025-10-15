@@ -87,7 +87,7 @@ User fills form → Click Submit → EmailJS API → Your Gmail Inbox ✉️
 If you haven't set up EmailJS yet, the form will:
 - ✅ Still work (no errors)
 - ⚠️ Show a message: "Email service not configured"
-- 📧 Provide fallback: "Contact us at hello@intelleeo.com"
+- 📧 Provide fallback: "Contact us at intelleeo.inteligence@gmail.com"
 
 ---
 
@@ -160,7 +160,7 @@ After setup, verify:
 💬 **Need Help?**
 - Check the guides above
 - Search "EmailJS React" on YouTube
-- Email: hello@intelleeo.com
+- Email: intelleeo.inteligence@gmail.com
 
 ---
 

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { Mail, MapPin, Phone, Clock, Send, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import emailjs from '@emailjs/browser';
+import { sendContactEmail } from '@/lib/email';
 
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -19,6 +19,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     projectType: '',
     message: ''
   });
@@ -35,8 +36,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email',
-      content: 'hello@intelleeo.com',
-      link: 'mailto:hello@intelleeo.com'
+      content: 'intelleeo.inteligence@gmail.com',
+      link: 'mailto:intelleeo.inteligence@gmail.com'
     },
     {
       icon: Phone,
@@ -70,34 +71,13 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      // EmailJS configuration
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-      // Check if EmailJS is configured
-      if (!serviceId || !templateId || !publicKey) {
-        console.warn('EmailJS not configured. Please add credentials to .env file');
-        // Fallback to simulation for development
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        throw new Error('Email service not configured. Please contact us directly at hello@intelleeo.com');
-      }
-
-      // Send email via EmailJS
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        project_type: formData.projectType || 'Not specified',
+      const response = await sendContactEmail({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        project_type: formData.projectType,
         message: formData.message,
-        to_email: 'hello@intelleeo.com', // Your email address
-      };
-
-      await emailjs.send(
-        serviceId,
-        templateId,
-        templateParams,
-        publicKey
-      );
+      });
 
       setIsLoading(false);
       setIsSubmitted(true);
@@ -113,18 +93,32 @@ const Contact = () => {
         setFormData({
           name: '',
           email: '',
+          phone: '',
           projectType: '',
           message: ''
         });
       }, 3000);
 
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
       console.error('Email send error:', error);
+      console.error('Error details:', {
+        text: error?.text,
+        status: error?.status,
+        message: error?.message
+      });
+      
+      let errorMessage = "Please try again or contact us directly at intelleeo.inteligence@gmail.com";
+      
+      if (error?.text) {
+        errorMessage = `Error: ${error.text}`;
+      } else if (error?.message) {
+        errorMessage = error.message;
+      }
       
       toast({
         title: "Failed to send message",
-        description: error instanceof Error ? error.message : "Please try again or contact us directly at hello@intelleeo.com",
+        description: errorMessage,
         variant: "destructive",
       });
     }
@@ -185,6 +179,16 @@ const Contact = () => {
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
                           required
+                        />
+                      </div>
+                      <div className="space-y-2 md:col-span-2">
+                        <Label htmlFor="phone">Phone (optional)</Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          placeholder="Your phone number"
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange('phone', e.target.value)}
                         />
                       </div>
                     </div>

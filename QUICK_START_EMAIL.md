@@ -23,7 +23,7 @@
 3. Choose your email provider (Gmail recommended):
    - Select "Gmail"
    - Click "Connect Account"
-   - Sign in with your Gmail (hello@intelleeo.com or any Gmail)
+   - Sign in with your Gmail (intelleeo.inteligence@gmail.com or any Gmail)
    - Allow EmailJS access
 4. Copy your **Service ID** (looks like: `service_abc1234`)
 
@@ -114,7 +114,7 @@ Your contact form is now sending real emails!
 
 1. **EmailJS Documentation**: https://www.emailjs.com/docs/
 2. **Video Tutorial**: Search "EmailJS React tutorial" on YouTube
-3. **Support**: hello@intelleeo.com
+3. **Support**: intelleeo.inteligence@gmail.com
 
 ## 🔒 Security Notes
 
