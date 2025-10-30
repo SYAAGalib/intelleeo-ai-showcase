@@ -11,6 +11,8 @@ export interface Project {
   techStack: string[];
   tags: ('AI' | 'Web' | 'Mobile' | 'Client' | 'Open Source')[];
   screenshot: string;
+  images?: string[];
+  demoVideo?: string;
   liveLink?: string;
   sourceCode?: string;
   aiHighlight?: string;

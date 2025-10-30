@@ -40,6 +40,7 @@ const ProjectDetail = () => {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
+            {/* Featured Image */}
             <div className="relative rounded-xl overflow-hidden shadow-[var(--shadow-card)]">
               <img
                 src={project.screenshot}
@@ -48,6 +49,39 @@ const ProjectDetail = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
+
+            {/* Image Gallery & Video */}
+            {project.images && project.images.length > 0 && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  {project.images.map((image, index) => (
+                    <div
+                      key={index}
+                      className="relative rounded-lg overflow-hidden shadow-[var(--shadow-card)] aspect-video"
+                    >
+                      <img
+                        src={image}
+                        alt={`${project.title} screenshot ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Demo Video - Commented out until video links are available */}
+                {/* {project.demoVideo && (
+                  <div className="relative rounded-lg overflow-hidden shadow-[var(--shadow-card)] aspect-video">
+                    <iframe
+                      src={project.demoVideo}
+                      title={`${project.title} demo video`}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                )} */}
+              </div>
+            )}
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-4">
