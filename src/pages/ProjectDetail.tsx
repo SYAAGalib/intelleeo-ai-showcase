@@ -82,25 +82,21 @@ const ProjectDetail = () => {
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
               
-              {/* Navigation Arrows */}
+              {/* Navigation Arrows - Full Height */}
               {allMedia.length > 1 && (
                 <>
-                  <Button
-                    variant="ghost"
-                    size="icon"
+                  <button
                     onClick={handlePrevious}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background/80 to-transparent hover:from-background/90 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
                   >
-                    <ChevronLeft className="h-6 w-6" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
+                    <ChevronLeft className="h-8 w-8 text-foreground" />
+                  </button>
+                  <button
                     onClick={handleNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background/80 to-transparent hover:from-background/90 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
                   >
-                    <ChevronRight className="h-6 w-6" />
-                  </Button>
+                    <ChevronRight className="h-8 w-8 text-foreground" />
+                  </button>
                 </>
               )}
             </div>
@@ -123,8 +119,11 @@ const ProjectDetail = () => {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-muted flex items-center justify-center">
-                        <ExternalLink className="h-6 w-6 text-muted-foreground" />
+                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20">
+                        <div className="text-center">
+                          <ExternalLink className="h-4 w-4 text-primary mx-auto mb-1" />
+                          <span className="text-[10px] text-primary font-medium">Video</span>
+                        </div>
                       </div>
                     )}
                   </button>
