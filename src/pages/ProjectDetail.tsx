@@ -1,18 +1,38 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowLeft, ExternalLink, Github, Clock, User, Lightbulb } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, Clock, User, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getProjectBySlug } from '@/data/projects';
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : null;
+  
+  // Create array of all media items (main screenshot + additional images + video)
+  const allMedia = project ? [
+    { type: 'image', src: project.screenshot },
+    ...(project.images?.map(img => ({ type: 'image', src: img })) || []),
+    ...(project.demoVideo ? [{ type: 'video', src: project.demoVideo }] : [])
+  ] : [];
+  
+  const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
 
   if (!project) {
     return <Navigate to="/404" replace />;
   }
+  
+  const handlePrevious = () => {
+    setSelectedMediaIndex((prev) => (prev === 0 ? allMedia.length - 1 : prev - 1));
+  };
+  
+  const handleNext = () => {
+    setSelectedMediaIndex((prev) => (prev === allMedia.length - 1 ? 0 : prev + 1));
+  };
+  
+  const selectedMedia = allMedia[selectedMediaIndex];
 
   return (
     <div className="min-h-screen pt-20">
@@ -32,57 +52,83 @@ const ProjectDetail = () => {
           </Button>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Project Image */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          {/* Project Media Gallery */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-6 lg:col-span-2"
           >
-            {/* Featured Image */}
-            <div className="relative rounded-xl overflow-hidden shadow-[var(--shadow-card)]">
-              <img
-                src={project.screenshot}
-                alt={project.title}
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            {/* Featured Media with Navigation */}
+            <div className="relative rounded-xl overflow-hidden shadow-[var(--shadow-card)] group">
+              {selectedMedia.type === 'image' ? (
+                <img
+                  src={selectedMedia.src}
+                  alt={project.title}
+                  className="w-full h-auto object-cover"
+                />
+              ) : (
+                <div className="relative aspect-video w-full">
+                  <iframe
+                    key={selectedMediaIndex}
+                    src={`${selectedMedia.src}?autoplay=0`}
+                    title={`${project.title} demo video`}
+                    className="w-full h-full"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+              
+              {/* Navigation Arrows */}
+              {allMedia.length > 1 && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={handlePrevious}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={handleNext}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </Button>
+                </>
+              )}
             </div>
 
-            {/* Image Gallery & Video */}
-            {project.images && project.images.length > 0 && (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                {/* Images Grid */}
-                <div className="lg:col-span-2 grid grid-cols-2 gap-4">
-                  {project.images.map((image, index) => (
-                    <div
-                      key={index}
-                      className="relative rounded-lg overflow-hidden shadow-[var(--shadow-card)] aspect-video"
-                    >
+            {/* Thumbnail Gallery */}
+            {allMedia.length > 1 && (
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+                {allMedia.map((media, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedMediaIndex(index)}
+                    className={`relative rounded-lg overflow-hidden shadow-[var(--shadow-card)] aspect-video transition-all hover:scale-105 hover:ring-2 hover:ring-primary ${
+                      selectedMediaIndex === index ? 'ring-2 ring-primary scale-105' : ''
+                    }`}
+                  >
+                    {media.type === 'image' ? (
                       <img
-                        src={image}
-                        alt={`${project.title} screenshot ${index + 1}`}
+                        src={media.src}
+                        alt={`Thumbnail ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Demo Video */}
-                {project.demoVideo && (
-                  <div className="lg:col-span-1">
-                    <div className="relative rounded-lg overflow-hidden shadow-[var(--shadow-card)] aspect-video lg:h-full">
-                      <iframe
-                        src={project.demoVideo}
-                        title={`${project.title} demo video`}
-                        className="w-full h-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                  </div>
-                )}
+                    ) : (
+                      <div className="w-full h-full bg-muted flex items-center justify-center">
+                        <ExternalLink className="h-6 w-6 text-muted-foreground" />
+                      </div>
+                    )}
+                  </button>
+                ))}
               </div>
             )}
 
@@ -112,7 +158,7 @@ const ProjectDetail = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
+            className="space-y-8 lg:col-span-1"
           >
             {/* Header */}
             <div>
