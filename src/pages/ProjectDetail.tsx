@@ -52,8 +52,9 @@ const ProjectDetail = () => {
 
             {/* Image Gallery & Video */}
             {project.images && project.images.length > 0 && (
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                {/* Images Grid */}
+                <div className="lg:col-span-2 grid grid-cols-2 gap-4">
                   {project.images.map((image, index) => (
                     <div
                       key={index}
@@ -70,14 +71,16 @@ const ProjectDetail = () => {
                 
                 {/* Demo Video - Commented out until video links are available */}
                 {/* {project.demoVideo && (
-                  <div className="relative rounded-lg overflow-hidden shadow-[var(--shadow-card)] aspect-video">
-                    <iframe
-                      src={project.demoVideo}
-                      title={`${project.title} demo video`}
-                      className="w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                  <div className="lg:col-span-1">
+                    <div className="relative rounded-lg overflow-hidden shadow-[var(--shadow-card)] aspect-video lg:h-full">
+                      <iframe
+                        src={project.demoVideo}
+                        title={`${project.title} demo video`}
+                        className="w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
                   </div>
                 )} */}
               </div>
