@@ -119,11 +119,35 @@ const ProjectDetail = () => {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20">
-                        <div className="text-center">
-                          <ExternalLink className="h-4 w-4 text-primary mx-auto mb-1" />
-                          <span className="text-[10px] text-primary font-medium">Video</span>
-                        </div>
+                      <div className="w-full h-full bg-muted relative">
+                        {(() => {
+                          // Extract YouTube video ID from URL
+                          const youtubeMatch = media.src.match(/(?:youtube\.com\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+                          const videoId = youtubeMatch ? youtubeMatch[1] : null;
+                          const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
+                          
+                          return thumbnailUrl ? (
+                            <>
+                              <img
+                                src={thumbnailUrl}
+                                alt="Video thumbnail"
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                <div className="w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
+                                  <div className="w-0 h-0 border-l-[12px] border-l-primary-foreground border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1" />
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20">
+                              <div className="text-center">
+                                <ExternalLink className="h-4 w-4 text-primary mx-auto mb-1" />
+                                <span className="text-[10px] text-primary font-medium">Video</span>
+                              </div>
+                            </div>
+                          );
+                        })()}
                       </div>
                     )}
                   </button>
