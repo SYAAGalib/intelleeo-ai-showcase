@@ -49,6 +49,13 @@ export const projects: Project[] = [
     techStack: ['React', 'TypeScript', 'Python', 'TensorFlow', 'PostgreSQL'],
     tags: ['AI', 'Web', 'Client'],
     screenshot: '/uploads/smart_analytics_dashboard.webp',
+    images: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'
+    ],
+    demoVideo: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     liveLink: 'https://smart-analytics.demo',
     aiHighlight: 'Machine learning models for predictive analytics and anomaly detection'
   },
@@ -80,6 +87,13 @@ export const projects: Project[] = [
     techStack: ['React', 'Laravel', 'MySQL', 'Tailwind', 'Payment API', 'VPS Hosting'],
     tags: ['Web', 'Client'],
     screenshot: '/uploads/DevNest/mariyamtraders.jpg',
+    images: [
+      'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=800&h=600&fit=crop'
+    ],
+    demoVideo: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     liveLink: 'http://mariyamtraders.com',
     aiHighlight: 'Real-time inventory sync, smart product recommendations, and optimized mobile UX for low-bandwidth environments'
   },

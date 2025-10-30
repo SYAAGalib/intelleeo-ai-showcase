@@ -69,8 +69,8 @@ const ProjectDetail = () => {
                   ))}
                 </div>
                 
-                {/* Demo Video - Commented out until video links are available */}
-                {/* {project.demoVideo && (
+                {/* Demo Video */}
+                {project.demoVideo && (
                   <div className="lg:col-span-1">
                     <div className="relative rounded-lg overflow-hidden shadow-[var(--shadow-card)] aspect-video lg:h-full">
                       <iframe
@@ -82,7 +82,7 @@ const ProjectDetail = () => {
                       />
                     </div>
                   </div>
-                )} */}
+                )}
               </div>
             )}
 
