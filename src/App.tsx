@@ -12,6 +12,14 @@ import Contact from "./pages/Contact";
 import ProjectDetail from "./pages/ProjectDetail";
 import Technologies from "./pages/Technologies";
 import NotFound from "./pages/NotFound";
+import AdminLogin from "./pages/admin/Login";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/Dashboard";
+import HeroEditor from "./pages/admin/HeroEditor";
+import AboutEditor from "./pages/admin/AboutEditor";
+import ContactEditor from "./pages/admin/ContactEditor";
+import ProjectsManager from "./pages/admin/ProjectsManager";
+import TechnologiesManager from "./pages/admin/TechnologiesManager";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +39,18 @@ const App = () => (
             <Route path="contact" element={<Contact />} />
             <Route path="projects/:slug" element={<ProjectDetail />} />
           </Route>
+          
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="hero" element={<HeroEditor />} />
+            <Route path="about" element={<AboutEditor />} />
+            <Route path="contact" element={<ContactEditor />} />
+            <Route path="projects" element={<ProjectsManager />} />
+            <Route path="technologies" element={<TechnologiesManager />} />
+          </Route>
+          
           {/* Catch-all route for 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>

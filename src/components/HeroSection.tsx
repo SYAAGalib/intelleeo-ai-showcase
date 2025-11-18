@@ -75,7 +75,7 @@ export const HeroSection = () => {
               className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 group"
               asChild
             >
-              <Link to="/#projects">
+              <Link to="/devnest">
                 View Our Work
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
