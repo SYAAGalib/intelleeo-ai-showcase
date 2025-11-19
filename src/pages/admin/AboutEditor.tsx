@@ -14,7 +14,8 @@ const AboutEditor = () => {
   const [formData, setFormData] = useState({
     mission: '',
     vision: '',
-    why_choose_us: '',
+    stats: [],
+    values: []
   });
 
   useEffect(() => {
@@ -85,15 +86,8 @@ const AboutEditor = () => {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="why">Why Choose Us</Label>
-              <Textarea
-                id="why"
-                value={formData.why_choose_us}
-                onChange={(e) => setFormData({ ...formData, why_choose_us: e.target.value })}
-                placeholder="Why choose us..."
-                rows={5}
-              />
+            <div className="text-sm text-muted-foreground mt-4">
+              <p>Note: Stats and Values sections are managed through the database defaults.</p>
             </div>
 
             <Button onClick={handleSave} disabled={loading} className="w-full">
