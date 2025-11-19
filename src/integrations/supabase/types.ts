@@ -14,16 +14,219 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      about_content: {
+        Row: {
+          id: string
+          mission: string
+          updated_at: string | null
+          vision: string
+          why_choose_us: string
+        }
+        Insert: {
+          id?: string
+          mission?: string
+          updated_at?: string | null
+          vision?: string
+          why_choose_us?: string
+        }
+        Update: {
+          id?: string
+          mission?: string
+          updated_at?: string | null
+          vision?: string
+          why_choose_us?: string
+        }
+        Relationships: []
+      }
+      contact_info: {
+        Row: {
+          address: string
+          email: string
+          github: string
+          id: string
+          linkedin: string
+          phone: string
+          twitter: string
+          updated_at: string | null
+        }
+        Insert: {
+          address?: string
+          email?: string
+          github?: string
+          id?: string
+          linkedin?: string
+          phone?: string
+          twitter?: string
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string
+          email?: string
+          github?: string
+          id?: string
+          linkedin?: string
+          phone?: string
+          twitter?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      hero_content: {
+        Row: {
+          cta_primary_text: string
+          cta_secondary_text: string
+          id: string
+          subtext: string
+          tagline: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          cta_primary_text?: string
+          cta_secondary_text?: string
+          id?: string
+          subtext?: string
+          tagline?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Update: {
+          cta_primary_text?: string
+          cta_secondary_text?: string
+          id?: string
+          subtext?: string
+          tagline?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          ai_highlight: string | null
+          created_at: string | null
+          description: string
+          id: string
+          images: string[] | null
+          live_link: string | null
+          problem: string
+          role: string
+          screenshot: string
+          slug: string
+          solution: string
+          source_code: string | null
+          subtitle: string
+          tags: string[]
+          tech_stack: string[]
+          timeline: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          ai_highlight?: string | null
+          created_at?: string | null
+          description: string
+          id?: string
+          images?: string[] | null
+          live_link?: string | null
+          problem: string
+          role: string
+          screenshot: string
+          slug: string
+          solution: string
+          source_code?: string | null
+          subtitle: string
+          tags?: string[]
+          tech_stack?: string[]
+          timeline: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          ai_highlight?: string | null
+          created_at?: string | null
+          description?: string
+          id?: string
+          images?: string[] | null
+          live_link?: string | null
+          problem?: string
+          role?: string
+          screenshot?: string
+          slug?: string
+          solution?: string
+          source_code?: string | null
+          subtitle?: string
+          tags?: string[]
+          tech_stack?: string[]
+          timeline?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      technologies: {
+        Row: {
+          category: string
+          color: string
+          created_at: string | null
+          icon: string
+          id: string
+          name: string
+        }
+        Insert: {
+          category: string
+          color: string
+          created_at?: string | null
+          icon: string
+          id?: string
+          name: string
+        }
+        Update: {
+          category?: string
+          color?: string
+          created_at?: string | null
+          icon?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +353,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
