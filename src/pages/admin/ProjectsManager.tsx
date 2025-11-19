@@ -6,9 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
+import { getProjects, saveProjects } from '@/lib/storage';
 
 interface Project {
   id?: string;
@@ -39,44 +39,28 @@ const ProjectsManager = () => {
     loadProjects();
   }, []);
 
-  const loadProjects = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setProjects(data || []);
-    } catch (error: any) {
-      toast({
-        title: 'Error loading projects',
-        description: error.message,
-        variant: 'destructive',
-      });
-    }
+  const loadProjects = () => {
+    const data = getProjects();
+    setProjects(data);
   };
 
-  const handleSave = async (project: Project) => {
+  const handleSave = (project: Project) => {
     try {
+      let updatedProjects;
       if (project.id) {
-        const { error } = await supabase
-          .from('projects')
-          .update(project)
-          .eq('id', project.id);
-        if (error) throw error;
+        updatedProjects = projects.map(p => p.id === project.id ? project : p);
       } else {
-        const { error } = await supabase
-          .from('projects')
-          .insert(project);
-        if (error) throw error;
+        const newProject = { ...project, id: Date.now().toString() };
+        updatedProjects = [...projects, newProject];
       }
-
+      
+      saveProjects(updatedProjects);
+      setProjects(updatedProjects);
+      
       toast({
         title: 'Success',
         description: 'Project saved successfully',
       });
-      loadProjects();
       setDialogOpen(false);
       setEditingProject(null);
     } catch (error: any) {
@@ -88,22 +72,18 @@ const ProjectsManager = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id: string) => {
     if (!confirm('Are you sure you want to delete this project?')) return;
 
     try {
-      const { error } = await supabase
-        .from('projects')
-        .delete()
-        .eq('id', id);
-
-      if (error) throw error;
+      const updatedProjects = projects.filter(p => p.id !== id);
+      saveProjects(updatedProjects);
+      setProjects(updatedProjects);
 
       toast({
         title: 'Success',
         description: 'Project deleted successfully',
       });
-      loadProjects();
     } catch (error: any) {
       toast({
         title: 'Error deleting',

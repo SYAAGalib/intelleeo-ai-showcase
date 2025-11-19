@@ -5,9 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Save } from 'lucide-react';
+import { getHeroContent, saveHeroContent } from '@/lib/storage';
 
 const HeroEditor = () => {
   const { toast } = useToast();
@@ -24,36 +24,15 @@ const HeroEditor = () => {
     loadHeroContent();
   }, []);
 
-  const loadHeroContent = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('hero_content')
-        .select('*')
-        .single();
-
-      if (error && error.code !== 'PGRST116') throw error;
-
-      if (data) {
-        setFormData(data);
-      }
-    } catch (error: any) {
-      toast({
-        title: 'Error loading content',
-        description: error.message,
-        variant: 'destructive',
-      });
-    }
+  const loadHeroContent = () => {
+    const data = getHeroContent();
+    setFormData(data);
   };
 
-  const handleSave = async () => {
+  const handleSave = () => {
     setLoading(true);
     try {
-      const { error } = await supabase
-        .from('hero_content')
-        .upsert(formData, { onConflict: 'id' });
-
-      if (error) throw error;
-
+      saveHeroContent(formData);
       toast({
         title: 'Success',
         description: 'Hero content updated successfully',

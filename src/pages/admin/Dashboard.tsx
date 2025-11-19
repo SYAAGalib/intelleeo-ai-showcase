@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { supabase } from '@/integrations/supabase/client';
+import { getProjects, getTechnologies, getHeroContent, getAboutContent } from '@/lib/storage';
 import { FileText, FolderKanban, Code, Mail } from 'lucide-react';
 
 const AdminDashboard = () => {
@@ -16,24 +16,18 @@ const AdminDashboard = () => {
     loadStats();
   }, []);
 
-  const loadStats = async () => {
-    try {
-      const [projectsRes, techRes, heroRes, aboutRes] = await Promise.all([
-        supabase.from('projects').select('id', { count: 'exact', head: true }),
-        supabase.from('technologies').select('id', { count: 'exact', head: true }),
-        supabase.from('hero_content').select('id').single(),
-        supabase.from('about_content').select('id').single(),
-      ]);
+  const loadStats = () => {
+    const projects = getProjects();
+    const technologies = getTechnologies();
+    const heroContent = getHeroContent();
+    const aboutContent = getAboutContent();
 
-      setStats({
-        projects: projectsRes.count || 0,
-        technologies: techRes.count || 0,
-        heroContent: !heroRes.error,
-        aboutContent: !aboutRes.error,
-      });
-    } catch (error) {
-      console.error('Error loading stats:', error);
-    }
+    setStats({
+      projects: projects.length,
+      technologies: technologies.length,
+      heroContent: !!heroContent.title,
+      aboutContent: !!aboutContent.mission,
+    });
   };
 
   const cards = [

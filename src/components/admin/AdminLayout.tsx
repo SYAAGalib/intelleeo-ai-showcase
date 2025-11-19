@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { 
@@ -15,6 +14,7 @@ import {
   Home
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { isAdminAuthenticated, adminLogout } from '@/lib/storage';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -26,42 +26,21 @@ const AdminLayout = () => {
     checkAuth();
   }, []);
 
-  const checkAuth = async () => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        navigate('/admin/login');
-        return;
-      }
-
-      // Check admin role
-      const { data: roleData, error } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', session.user.id)
-        .eq('role', 'admin')
-        .single();
-
-      if (error || !roleData) {
-        await supabase.auth.signOut();
-        navigate('/admin/login');
-        toast({
-          title: 'Access denied',
-          description: 'Admin privileges required',
-          variant: 'destructive',
-        });
-        return;
-      }
-    } catch (error) {
+  const checkAuth = () => {
+    if (!isAdminAuthenticated()) {
       navigate('/admin/login');
-    } finally {
-      setLoading(false);
+      toast({
+        title: 'Access denied',
+        description: 'Please login to access admin panel',
+        variant: 'destructive',
+      });
+      return;
     }
+    setLoading(false);
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
+  const handleLogout = () => {
+    adminLogout();
     navigate('/admin/login');
     toast({
       title: 'Logged out',

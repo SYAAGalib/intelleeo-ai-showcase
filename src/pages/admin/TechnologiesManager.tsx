@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
+import { getTechnologies, saveTechnologies } from '@/lib/storage';
 
 interface Technology {
   id?: string;
@@ -27,44 +27,28 @@ const TechnologiesManager = () => {
     loadTechnologies();
   }, []);
 
-  const loadTechnologies = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('technologies')
-        .select('*')
-        .order('category', { ascending: true });
-
-      if (error) throw error;
-      setTechnologies(data || []);
-    } catch (error: any) {
-      toast({
-        title: 'Error loading technologies',
-        description: error.message,
-        variant: 'destructive',
-      });
-    }
+  const loadTechnologies = () => {
+    const data = getTechnologies();
+    setTechnologies(data);
   };
 
-  const handleSave = async (tech: Technology) => {
+  const handleSave = (tech: Technology) => {
     try {
+      let updatedTechnologies;
       if (tech.id) {
-        const { error } = await supabase
-          .from('technologies')
-          .update(tech)
-          .eq('id', tech.id);
-        if (error) throw error;
+        updatedTechnologies = technologies.map(t => t.id === tech.id ? tech : t);
       } else {
-        const { error } = await supabase
-          .from('technologies')
-          .insert(tech);
-        if (error) throw error;
+        const newTech = { ...tech, id: Date.now().toString() };
+        updatedTechnologies = [...technologies, newTech];
       }
+      
+      saveTechnologies(updatedTechnologies);
+      setTechnologies(updatedTechnologies);
 
       toast({
         title: 'Success',
         description: 'Technology saved successfully',
       });
-      loadTechnologies();
       setDialogOpen(false);
       setEditingTech(null);
     } catch (error: any) {
@@ -76,22 +60,18 @@ const TechnologiesManager = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id: string) => {
     if (!confirm('Are you sure you want to delete this technology?')) return;
 
     try {
-      const { error } = await supabase
-        .from('technologies')
-        .delete()
-        .eq('id', id);
-
-      if (error) throw error;
+      const updatedTechnologies = technologies.filter(t => t.id !== id);
+      saveTechnologies(updatedTechnologies);
+      setTechnologies(updatedTechnologies);
 
       toast({
         title: 'Success',
         description: 'Technology deleted successfully',
       });
-      loadTechnologies();
     } catch (error: any) {
       toast({
         title: 'Error deleting',
