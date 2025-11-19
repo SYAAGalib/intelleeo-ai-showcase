@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { LogIn } from 'lucide-react';
+import { adminLogin } from '@/lib/storage';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -21,34 +21,18 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const success = adminLogin(email, password);
 
-      if (error) throw error;
-
-      if (data.user) {
-        // Check if user is admin
-        const { data: roleData, error: roleError } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', data.user.id)
-          .eq('role', 'admin')
-          .single();
-
-        if (roleError || !roleData) {
-          await supabase.auth.signOut();
-          throw new Error('Access denied. Admin privileges required.');
-        }
-
-        toast({
-          title: 'Login successful',
-          description: 'Welcome to the admin panel',
-        });
-        
-        navigate('/admin/dashboard');
+      if (!success) {
+        throw new Error('Invalid email or password');
       }
+
+      toast({
+        title: 'Login successful',
+        description: 'Welcome to the admin panel',
+      });
+      
+      navigate('/admin/dashboard');
     } catch (error: any) {
       toast({
         title: 'Login failed',

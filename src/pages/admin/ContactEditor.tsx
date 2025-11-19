@@ -4,9 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Save } from 'lucide-react';
+import { getContactInfo, saveContactInfo } from '@/lib/storage';
 
 const ContactEditor = () => {
   const { toast } = useToast();
@@ -24,36 +24,15 @@ const ContactEditor = () => {
     loadContactInfo();
   }, []);
 
-  const loadContactInfo = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('contact_info')
-        .select('*')
-        .single();
-
-      if (error && error.code !== 'PGRST116') throw error;
-
-      if (data) {
-        setFormData(data);
-      }
-    } catch (error: any) {
-      toast({
-        title: 'Error loading content',
-        description: error.message,
-        variant: 'destructive',
-      });
-    }
+  const loadContactInfo = () => {
+    const data = getContactInfo();
+    setFormData(data);
   };
 
-  const handleSave = async () => {
+  const handleSave = () => {
     setLoading(true);
     try {
-      const { error } = await supabase
-        .from('contact_info')
-        .upsert(formData, { onConflict: 'id' });
-
-      if (error) throw error;
-
+      saveContactInfo(formData);
       toast({
         title: 'Success',
         description: 'Contact info updated successfully',
