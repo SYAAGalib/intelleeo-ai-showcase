@@ -5,8 +5,24 @@ const STORAGE_KEYS = {
   CONTACT: 'admin_contact_info',
   PROJECTS: 'admin_projects',
   TECHNOLOGIES: 'admin_technologies',
+  BLOGS: 'admin_blogs',
   AUTH: 'admin_auth',
 };
+
+// Blog Post interface
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  date: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+  featured: boolean;
+}
 
 // Admin credentials
 export const ADMIN_CREDENTIALS = {
@@ -327,4 +343,146 @@ export const getTechnologies = () => {
 
 export const saveTechnologies = (technologies: any[]) => {
   setStorageData(STORAGE_KEYS.TECHNOLOGIES, technologies);
+};
+
+export const getVisibleTechnologies = () => {
+  const allTechs = getTechnologies();
+  return allTechs.filter((tech: any) => tech.visible !== false);
+};
+
+// Blog functions
+export const getBlogs = (): BlogPost[] => {
+  return getStorageData(STORAGE_KEYS.BLOGS, [
+    {
+      id: '1',
+      title: 'AI Development Services: Transforming Business with Artificial Intelligence',
+      slug: 'ai-development-services',
+      excerpt: 'Discover how our AI development services leverage machine learning, neural networks, and natural language processing to create intelligent solutions that drive business growth and innovation.',
+      content: `<h2>Introduction to AI Development</h2>
+<p>Artificial Intelligence is revolutionizing how businesses operate, make decisions, and interact with customers. Our AI development services combine cutting-edge machine learning algorithms, deep neural networks, and advanced data analytics to create intelligent systems that solve complex business challenges.</p>
+
+<h2>Our AI Development Capabilities</h2>
+<p>We specialize in developing custom AI solutions including:</p>
+<ul>
+<li><strong>Machine Learning Models:</strong> Predictive analytics, classification, clustering, and recommendation systems</li>
+<li><strong>Natural Language Processing:</strong> Chatbots, sentiment analysis, text generation, and language translation</li>
+<li><strong>Computer Vision:</strong> Image recognition, object detection, facial recognition, and video analytics</li>
+<li><strong>Deep Learning:</strong> Neural networks for complex pattern recognition and decision-making</li>
+</ul>
+
+<h2>Technologies We Use</h2>
+<p>Our AI development stack includes TensorFlow, PyTorch, OpenAI GPT models, Hugging Face transformers, and cloud AI services from AWS, Google Cloud, and Azure.</p>
+
+<h2>Business Impact</h2>
+<p>AI-powered solutions can automate repetitive tasks, provide data-driven insights, enhance customer experiences, and unlock new revenue opportunities. From startups to enterprises, we help businesses leverage AI to stay competitive in the digital age.</p>`,
+      author: 'intelleeo Team',
+      date: '2025-01-15',
+      readTime: '8 min',
+      category: 'AI Development',
+      tags: ['AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Computer Vision'],
+      featured: true
+    },
+    {
+      id: '2',
+      title: 'Web Application Development: Building Scalable Modern Solutions',
+      slug: 'web-application-development',
+      excerpt: 'Learn about our web application development services using React, Next.js, Node.js, and cloud technologies to build fast, scalable, and user-friendly web applications.',
+      content: `<h2>Modern Web Development</h2>
+<p>In today's digital landscape, web applications need to be fast, responsive, scalable, and secure. Our web development services leverage modern frameworks and best practices to deliver exceptional user experiences.</p>
+
+<h2>Our Tech Stack</h2>
+<ul>
+<li><strong>Frontend:</strong> React, Next.js, TypeScript, TailwindCSS for beautiful, performant interfaces</li>
+<li><strong>Backend:</strong> Node.js, Express, Python, Laravel for robust server-side logic</li>
+<li><strong>Database:</strong> PostgreSQL, MongoDB, Redis for efficient data management</li>
+<li><strong>Cloud:</strong> AWS, Vercel, Docker for scalable deployment</li>
+</ul>
+
+<h2>Development Process</h2>
+<p>We follow agile methodologies with continuous integration and deployment, ensuring rapid iteration and high-quality deliverables. Our development process includes requirements analysis, UI/UX design, development, testing, and deployment.</p>
+
+<h2>Key Features</h2>
+<p>We build applications with authentication, real-time updates, API integrations, responsive design, SEO optimization, and performance monitoring built-in from day one.</p>`,
+      author: 'intelleeo Team',
+      date: '2025-01-10',
+      readTime: '7 min',
+      category: 'Web Development',
+      tags: ['Web Development', 'React', 'Node.js', 'Full Stack'],
+      featured: true
+    },
+    {
+      id: '3',
+      title: 'Mobile App Development: Native and Cross-Platform Solutions',
+      slug: 'mobile-app-development',
+      excerpt: 'Explore our mobile app development services using React Native, Flutter, and native technologies to create engaging mobile experiences for iOS and Android.',
+      content: `<h2>Mobile-First Development</h2>
+<p>Mobile devices account for over 60% of web traffic. Our mobile app development services help you reach users where they are with native and cross-platform applications.</p>
+
+<h2>Development Approaches</h2>
+<ul>
+<li><strong>React Native:</strong> Build once, deploy to iOS and Android with JavaScript and React</li>
+<li><strong>Flutter:</strong> Google's UI toolkit for beautiful, natively compiled applications</li>
+<li><strong>Native Development:</strong> Swift for iOS and Kotlin for Android when platform-specific features are needed</li>
+</ul>
+
+<h2>Mobile App Features</h2>
+<p>We develop apps with push notifications, offline functionality, geolocation, camera integration, payment processing, and seamless backend synchronization.</p>
+
+<h2>Performance & UX</h2>
+<p>Mobile apps must be fast and intuitive. We optimize for performance, battery life, and data usage while creating delightful user experiences that keep users engaged.</p>`,
+      author: 'intelleeo Team',
+      date: '2025-01-05',
+      readTime: '6 min',
+      category: 'Mobile Development',
+      tags: ['Mobile', 'React Native', 'Flutter', 'iOS', 'Android'],
+      featured: false
+    },
+    {
+      id: '4',
+      title: 'Consulting Services: Technology Strategy and Digital Transformation',
+      slug: 'consulting-services',
+      excerpt: 'Discover how our technology consulting services help businesses navigate digital transformation, adopt new technologies, and optimize their development processes.',
+      content: `<h2>Strategic Technology Consulting</h2>
+<p>Technology decisions have long-term impacts on business success. Our consulting services help you make informed decisions about technology stack, architecture, team structure, and development processes.</p>
+
+<h2>Consulting Areas</h2>
+<ul>
+<li><strong>Technology Assessment:</strong> Evaluate current systems and recommend improvements</li>
+<li><strong>Architecture Design:</strong> Plan scalable, maintainable system architectures</li>
+<li><strong>Team Building:</strong> Help recruit, train, and organize development teams</li>
+<li><strong>Process Optimization:</strong> Implement agile, DevOps, and CI/CD practices</li>
+</ul>
+
+<h2>Digital Transformation</h2>
+<p>We guide businesses through digital transformation initiatives, from legacy system modernization to cloud migration and AI adoption.</p>
+
+<h2>ROI-Focused Approach</h2>
+<p>Every recommendation is backed by data and focused on delivering measurable business value, whether through cost savings, revenue growth, or operational efficiency.</p>`,
+      author: 'intelleeo Team',
+      date: '2024-12-28',
+      readTime: '5 min',
+      category: 'Consulting',
+      tags: ['Consulting', 'Strategy', 'Digital Transformation', 'Best Practices'],
+      featured: false
+    }
+  ]);
+};
+
+export const saveBlog = (blog: BlogPost) => {
+  const blogs = getBlogs();
+  const index = blogs.findIndex((b) => b.id === blog.id);
+  
+  if (index >= 0) {
+    blogs[index] = blog;
+  } else {
+    blogs.push(blog);
+  }
+  
+  setStorageData(STORAGE_KEYS.BLOGS, blogs);
+};
+
+export const deleteBlog = (id: string) => {
+  const blogs = getBlogs();
+  const filtered = blogs.filter((b) => b.id !== id);
+  setStorageData(STORAGE_KEYS.BLOGS, filtered);
 };
