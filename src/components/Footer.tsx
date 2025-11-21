@@ -53,10 +53,31 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li className="text-muted-foreground">AI Development</li>
-              <li className="text-muted-foreground">Web Applications</li>
-              <li className="text-muted-foreground">Mobile Apps</li>
-              <li className="text-muted-foreground">Consulting</li>
+              <li>
+                <Link to="/blog/ai-development-services" className="text-muted-foreground hover:text-primary transition-colors">
+                  AI Development
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/web-application-development" className="text-muted-foreground hover:text-primary transition-colors">
+                  Web Applications
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/mobile-app-development" className="text-muted-foreground hover:text-primary transition-colors">
+                  Mobile Apps
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/consulting-services" className="text-muted-foreground hover:text-primary transition-colors">
+                  Consulting
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors font-semibold">
+                  Blog
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

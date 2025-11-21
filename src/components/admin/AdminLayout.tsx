@@ -11,7 +11,8 @@ import {
   Mail, 
   LogOut,
   Menu,
-  Home
+  Home,
+  BookOpen
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { isAdminAuthenticated, adminLogout } from '@/lib/storage';
@@ -55,6 +56,7 @@ const AdminLayout = () => {
     { icon: Mail, label: 'Contact Info', path: '/admin/contact' },
     { icon: FolderKanban, label: 'Projects', path: '/admin/projects' },
     { icon: Code, label: 'Technologies', path: '/admin/technologies' },
+    { icon: BookOpen, label: 'Blog', path: '/admin/blog' },
   ];
 
   if (loading) {

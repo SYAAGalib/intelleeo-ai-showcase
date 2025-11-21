@@ -11,7 +11,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ProjectDetail from "./pages/ProjectDetail";
 import Technologies from "./pages/Technologies";
+import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
+import { ScrollToTop } from "./components/ScrollToTop";
 import AdminLogin from "./pages/admin/Login";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
@@ -20,6 +22,7 @@ import AboutEditor from "./pages/admin/AboutEditor";
 import ContactEditor from "./pages/admin/ContactEditor";
 import ProjectsManager from "./pages/admin/ProjectsManager";
 import TechnologiesManager from "./pages/admin/TechnologiesManager";
+import BlogManager from "./pages/admin/BlogManager";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +33,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Index />} />
@@ -37,6 +41,8 @@ const App = () => (
             <Route path="technologies" element={<Technologies />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<Blog />} />
             <Route path="projects/:slug" element={<ProjectDetail />} />
           </Route>
           
@@ -49,6 +55,7 @@ const App = () => (
             <Route path="contact" element={<ContactEditor />} />
             <Route path="projects" element={<ProjectsManager />} />
             <Route path="technologies" element={<TechnologiesManager />} />
+            <Route path="blog" element={<BlogManager />} />
           </Route>
           
           {/* Catch-all route for 404 */}

@@ -1,10 +1,30 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { technologies, getCategories, getTechnologiesByCategory } from '@/data/technologies';
+import { getVisibleTechnologies } from '@/lib/storage';
+import { useState, useEffect } from 'react';
+
+interface Technology {
+  id: string;
+  name: string;
+  category: string;
+  icon: string;
+  color: string;
+  visible?: boolean;
+}
 
 const Technologies = () => {
-  const categories = getCategories();
+  const [technologies, setTechnologies] = useState<Technology[]>([]);
+  
+  useEffect(() => {
+    setTechnologies(getVisibleTechnologies());
+  }, []);
+
+  const categories = Array.from(new Set(technologies.map(t => t.category)));
+  
+  const getTechnologiesByCategory = (category: string) => {
+    return technologies.filter(t => t.category === category);
+  };
 
   const categoryColors: Record<string, string> = {
     'Frontend': 'bg-blue-500/10 border-blue-500/20 text-blue-700',
