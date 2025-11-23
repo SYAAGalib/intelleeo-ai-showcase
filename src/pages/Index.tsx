@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { HeroSection } from '@/components/HeroSection';
 import { ProjectCard } from '@/components/ProjectCard';
+import { TeamSection } from '@/components/TeamSection';
+import { FAQSection } from '@/components/FAQSection';
 import { projects } from '@/data/projects';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -54,6 +56,12 @@ const Index = () => {
             </motion.div>
           </div>
         </section>
+
+      {/* Team Section */}
+      <TeamSection />
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       {/* Call to Action Section */}
       <section className="py-20 bg-primary/5">

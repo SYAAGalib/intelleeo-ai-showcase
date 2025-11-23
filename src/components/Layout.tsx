@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
+import { FloatingChat } from './FloatingChat';
 
 export const Layout = () => {
   return (
@@ -10,6 +11,7 @@ export const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <FloatingChat />
     </div>
   );
 };
