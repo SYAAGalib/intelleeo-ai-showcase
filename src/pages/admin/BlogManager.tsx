@@ -61,7 +61,7 @@ export default function BlogManager() {
   }, []);
 
   const loadBlogs = () => {
-    const loadedBlogs = getBlogs(true); // Include hidden posts in admin
+    const loadedBlogs = getBlogs();
     setBlogs(loadedBlogs);
   };
 
@@ -122,8 +122,7 @@ export default function BlogManager() {
       readTime: formData.readTime!,
       category: formData.category!,
       tags: formData.tags || [],
-      featured: formData.featured || false,
-      hidden: formData.hidden || false
+      featured: formData.featured || false
     };
 
     saveBlog(blogPost);
@@ -281,15 +280,6 @@ export default function BlogManager() {
                   <Label htmlFor="featured">Featured Post</Label>
                 </div>
 
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="hidden"
-                    checked={formData.hidden || false}
-                    onCheckedChange={(hidden) => setFormData({ ...formData, hidden })}
-                  />
-                  <Label htmlFor="hidden">Hidden (SEO only, not visible on site)</Label>
-                </div>
-
                 <div className="space-y-2">
                   <Label>Content *</Label>
                   <ReactQuill
@@ -323,7 +313,6 @@ export default function BlogManager() {
                       <span>{new Date(blog.date).toLocaleDateString()}</span>
                       <span>{blog.readTime}</span>
                       {blog.featured && <span className="text-primary">Featured</span>}
-                      {blog.hidden && <span className="text-muted-foreground">Hidden</span>}
                     </div>
                   </div>
                   <div className="flex gap-2">

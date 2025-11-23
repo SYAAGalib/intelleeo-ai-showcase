@@ -10,7 +10,6 @@ import { Label } from '@/components/ui/label';
 import { Mail, MapPin, Phone, Clock, Send, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { sendContactEmail } from '@/lib/email';
-import { saveContactMessage } from '@/lib/storage-team';
 
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -70,18 +69,6 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
-    // Save to storage
-    saveContactMessage({
-      id: Date.now().toString(),
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      projectType: formData.projectType,
-      message: formData.message,
-      timestamp: new Date().toISOString(),
-      read: false
-    });
 
     try {
       const response = await sendContactEmail({
@@ -161,23 +148,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
           >
-            {/* Map */}
-            <Card>
-              <CardContent className="p-0 overflow-hidden rounded-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118162.3087199857!2d89.48464537910156!3d22.80975580000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff9071cb778b29%3A0x35c0f9088c37c80d!2sKhulna%2C%20Bangladesh!5e0!3m2!1sen!2s!4v1234567890"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Office Location"
-                />
-              </CardContent>
-            </Card>
             <Card className="h-fit">
               <CardHeader>
                 <CardTitle className="text-2xl">Send us a Message</CardTitle>
@@ -286,22 +257,6 @@ const Contact = () => {
                     </p>
                   </motion.div>
                 )}
-              </CardContent>
-            </Card>
-
-            {/* Map */}
-            <Card>
-              <CardContent className="p-0 overflow-hidden rounded-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118162.3087199857!2d89.48464537910156!3d22.80975580000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff9071cb778b29%3A0x35c0f9088c37c80d!2sKhulna%2C%20Bangladesh!5e0!3m2!1sen!2s!4v1234567890"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Office Location"
-                />
               </CardContent>
             </Card>
           </motion.div>

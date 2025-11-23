@@ -39,11 +39,13 @@ export const Footer = () => {
 
           {/* Navigation */}
           <div>
-            <h3 className="font-semibold mb-4">Company</h3>
+            <h3 className="font-semibold mb-4">Navigation</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/team" className="text-muted-foreground hover:text-primary transition-colors">Our Team</Link></li>
-              <li><Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors">Blog</Link></li>
+              <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Home</Link></li>
+              <li><Link to="/devnest" className="text-muted-foreground hover:text-primary transition-colors">DevNest</Link></li>
+              <li><Link to="/technologies" className="text-muted-foreground hover:text-primary transition-colors">Technologies</Link></li>
+              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About</Link></li>
+              <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
             </ul>
           </div>
 

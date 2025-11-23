@@ -57,8 +57,6 @@ const AdminLayout = () => {
     { icon: FolderKanban, label: 'Projects', path: '/admin/projects' },
     { icon: Code, label: 'Technologies', path: '/admin/technologies' },
     { icon: BookOpen, label: 'Blog', path: '/admin/blog' },
-    { icon: Users, label: 'Team', path: '/admin/team' },
-    { icon: Mail, label: 'Messages', path: '/admin/messages' },
   ];
 
   if (loading) {

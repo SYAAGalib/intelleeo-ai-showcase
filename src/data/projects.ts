@@ -21,8 +21,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: '1',
-    slug: 'Serenity Fitness & Yoga',
-    title: 'serenity-fitness-and-yoga',
+    slug: 'ai-content-optimizer',
+    title: 'AI Content Optimizer',
     subtitle: 'Smart content enhancement platform',
     description: 'An intelligent content optimization platform that uses advanced NLP to analyze, enhance, and personalize content for maximum engagement.',
     problem: 'Content creators struggle to optimize their content for different audiences and platforms, leading to reduced engagement and reach.',
@@ -31,9 +31,9 @@ export const projects: Project[] = [
     timeline: '3 months',
     techStack: ['React', 'Node.js', 'OpenAI GPT-4', 'MongoDB', 'TailwindCSS'],
     tags: ['AI', 'Web', 'Client'],
-    screenshot: '/uploads/DevNest/yoga.png',
-    liveLink: 'https://yoga-fitness.vercel.app/',
-    sourceCode: '#',
+    screenshot: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=1200&fit=crop',
+    liveLink: 'https://ai-content-optimizer.demo',
+    sourceCode: 'https://github.com/intelleeo/ai-content-optimizer',
     aiHighlight: 'Custom RAG model with OpenAI for personalized content recommendations'
   },
   {

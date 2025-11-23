@@ -22,37 +22,6 @@ export interface BlogPost {
   category: string;
   tags: string[];
   featured: boolean;
-  hidden?: boolean;
-}
-
-export interface TeamMember {
-  id: string;
-  name: string;
-  position: string;
-  image: string;
-  bio: string;
-  certificationId: string;
-  skills: string[];
-  email: string;
-  isCXO?: boolean;
-}
-
-export interface ContactMessage {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  projectType: string;
-  message: string;
-  timestamp: string;
-  read: boolean;
-}
-
-export interface ChatSummary {
-  id: string;
-  timestamp: string;
-  messages: number;
-  preview: string;
 }
 
 // Admin credentials
@@ -382,14 +351,8 @@ export const getVisibleTechnologies = () => {
 };
 
 // Blog functions
-export const getBlogs = (includeHidden = false): BlogPost[] => {
-  const data = localStorage.getItem(STORAGE_KEYS.BLOGS);
-  const allBlogs = data ? JSON.parse(data) : getDefaultBlogs();
-  return includeHidden ? allBlogs : allBlogs.filter((blog: BlogPost) => !blog.hidden);
-};
-
-const getDefaultBlogs = (): BlogPost[] => {
-  return [
+export const getBlogs = (): BlogPost[] => {
+  return getStorageData(STORAGE_KEYS.BLOGS, [
     {
       id: '1',
       title: 'AI Development Services: Transforming Business with Artificial Intelligence',
@@ -502,7 +465,7 @@ const getDefaultBlogs = (): BlogPost[] => {
       tags: ['Consulting', 'Strategy', 'Digital Transformation', 'Best Practices'],
       featured: false
     }
-  ];
+  ]);
 };
 
 export const saveBlog = (blog: BlogPost) => {
@@ -519,21 +482,7 @@ export const saveBlog = (blog: BlogPost) => {
 };
 
 export const deleteBlog = (id: string) => {
-  const blogs = getBlogs(true).filter(blog => blog.id !== id);
-  setStorageData(STORAGE_KEYS.BLOGS, blogs);
+  const blogs = getBlogs();
+  const filtered = blogs.filter((b) => b.id !== id);
+  setStorageData(STORAGE_KEYS.BLOGS, filtered);
 };
-
-// Re-export from storage-team for convenience
-export { 
-  getTeamMembers, 
-  getCXOTeam, 
-  saveTeamMember, 
-  deleteTeamMember,
-  getContactMessages,
-  saveContactMessage,
-  markMessageAsRead,
-  deleteContactMessage,
-  getChatSummaries,
-  saveChat,
-  deleteChatSummary
-} from './storage-team';

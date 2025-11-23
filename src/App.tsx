@@ -9,7 +9,6 @@ import Index from "./pages/Index";
 import DevNest from "./pages/DevNest";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Team from "./pages/Team";
 import ProjectDetail from "./pages/ProjectDetail";
 import Technologies from "./pages/Technologies";
 import Blog from "./pages/Blog";
@@ -24,14 +23,12 @@ import ContactEditor from "./pages/admin/ContactEditor";
 import ProjectsManager from "./pages/admin/ProjectsManager";
 import TechnologiesManager from "./pages/admin/TechnologiesManager";
 import BlogManager from "./pages/admin/BlogManager";
-import TeamManager from "./pages/admin/TeamManager";
-import MessagesManager from "./pages/admin/MessagesManager";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -43,7 +40,6 @@ const App = () => (
             <Route path="devnest" element={<DevNest />} />
             <Route path="technologies" element={<Technologies />} />
             <Route path="about" element={<About />} />
-            <Route path="team" element={<Team />} />
             <Route path="contact" element={<Contact />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<Blog />} />
@@ -60,8 +56,6 @@ const App = () => (
             <Route path="projects" element={<ProjectsManager />} />
             <Route path="technologies" element={<TechnologiesManager />} />
             <Route path="blog" element={<BlogManager />} />
-            <Route path="team" element={<TeamManager />} />
-            <Route path="messages" element={<MessagesManager />} />
           </Route>
           
           {/* Catch-all route for 404 */}
