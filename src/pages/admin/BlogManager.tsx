@@ -24,6 +24,7 @@ interface BlogPost {
   category: string;
   tags: string[];
   featured: boolean;
+  hidden?: boolean;
 }
 
 const CATEGORIES = [
@@ -52,7 +53,8 @@ export default function BlogManager() {
     readTime: '5 min',
     category: 'AI Development',
     tags: [],
-    featured: false
+    featured: false,
+    hidden: false
   });
   const { toast } = useToast();
 
@@ -77,7 +79,8 @@ export default function BlogManager() {
       readTime: '5 min',
       category: 'AI Development',
       tags: [],
-      featured: false
+      featured: false,
+      hidden: false
     });
   };
 

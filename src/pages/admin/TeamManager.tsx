@@ -7,22 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { getTeamMembers, saveTeamMember, deleteTeamMember } from '@/lib/storage-team';
+import { TeamMember } from '@/lib/storage';
 import { useToast } from '@/hooks/use-toast';
 import { Trash2, Plus, Save, Upload } from 'lucide-react';
 import imageCompression from 'browser-image-compression';
 import { MultiSelect } from '@/components/admin/MultiSelect';
-
-export interface TeamMember {
-  id: string;
-  name: string;
-  position: string;
-  image: string;
-  bio: string;
-  certificationId: string;
-  skills: string[];
-  email: string;
-  isCXO: boolean;
-}
 
 const SKILLS_OPTIONS = [
   'React', 'Node.js', 'Python', 'AI/ML', 'TensorFlow', 'PyTorch',
