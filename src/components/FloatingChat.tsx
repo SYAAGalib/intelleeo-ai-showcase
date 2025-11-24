@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { supabase } from '@/integrations/supabase/client';
 import { saveChat } from '@/lib/storage';
 
 interface Message {
@@ -38,6 +37,9 @@ export const FloatingChat = () => {
     setIsLoading(true);
 
     try {
+      // Dynamically import supabase client only when needed
+      const { supabase } = await import('@/integrations/supabase/client');
+      
       const { data, error } = await supabase.functions.invoke('chat-assistant', {
         body: { 
           messages: [...messages, { role: 'user', content: userMessage }]
