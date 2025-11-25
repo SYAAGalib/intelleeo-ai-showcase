@@ -38,13 +38,13 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email',
-      content: 'intelleeo.inteligence@gmail.com',
-      link: 'mailto:intelleeo.inteligence@gmail.com'
+      content: 'hello@intelleeo.com',
+      link: 'mailto:hello@intelleeo.com'
     },
     {
       icon: Phone,
       title: 'Phone',
-      content: '+880 1946 303020',
+      content: '+880 1946 303020</br>+880 1911 044709',
       link: 'tel:+8801946303020'
     },
     {
