@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { Mail, MapPin, Phone, Clock, Send, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Phone, Clock, Send, CheckCircle, ChevronDown } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { sendContactEmail } from '@/lib/email';
 import { saveContactMessage } from '@/lib/storage-team';
@@ -15,6 +15,7 @@ import { saveContactMessage } from '@/lib/storage-team';
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [hoveredFaqIndex, setHoveredFaqIndex] = useState<number | null>(null);
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -57,6 +58,21 @@ const Contact = () => {
       title: 'Response Time',
       content: 'Within 24 hours',
       link: null
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "How long does a typical project take?",
+      answer: "Project timelines vary based on complexity, but most projects range from 2-6 months."
+    },
+    {
+      question: "Do you work with startups?",
+      answer: "Absolutely! We love working with startups and offer flexible engagement models."
+    },
+    {
+      question: "Can you help with existing projects?",
+      answer: "Yes, we can audit, optimize, or enhance existing applications and systems."
     }
   ];
 
@@ -163,21 +179,6 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-8"
           >
-            {/* Map */}
-            <Card>
-              <CardContent className="p-0 overflow-hidden rounded-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118162.3087199857!2d89.48464537910156!3d22.80975580000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff9071cb778b29%3A0x35c0f9088c37c80d!2sKhulna%2C%20Bangladesh!5e0!3m2!1sen!2s!4v1234567890"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Office Location"
-                />
-              </CardContent>
-            </Card>
             <Card className="h-fit">
               <CardHeader>
                 <CardTitle className="text-2xl">Send us a Message</CardTitle>
@@ -186,106 +187,7 @@ const Contact = () => {
                 </p>
               </CardHeader>
               <CardContent>
-                {!isSubmitted ? (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Name *</Label>
-                        <Input
-                          id="name"
-                          placeholder="Your name"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange('name', e.target.value)}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="your.email@example.com"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange('email', e.target.value)}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2 md:col-span-2">
-                        <Label htmlFor="phone">Phone (optional)</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="Your phone number"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange('phone', e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="projectType">Project Type</Label>
-                      <Select value={formData.projectType} onValueChange={(value) => handleInputChange('projectType', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select project type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {projectTypes.map((type) => (
-                            <SelectItem key={type} value={type}>
-                              {type}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
-                      <Textarea
-                        id="message"
-                        placeholder="Tell us about your project, goals, and timeline..."
-                        className="min-h-[120px]"
-                        value={formData.message}
-                        onChange={(e) => handleInputChange('message', e.target.value)}
-                        required
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      className="w-full" 
-                      size="lg"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <>
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                            className="w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"
-                          />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="mr-2 h-4 w-4" />
-                          Send Message
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-12"
-                  >
-                    <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                    <p className="text-muted-foreground">
-                      Thank you for reaching out. We'll get back to you within 24 hours.
-                    </p>
-                  </motion.div>
-                )}
+...
               </CardContent>
             </Card>
 
@@ -383,25 +285,41 @@ const Contact = () => {
               <CardHeader>
                 <CardTitle>Frequently Asked Questions</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h4 className="font-semibold mb-2">How long does a typical project take?</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Project timelines vary based on complexity, but most projects range from 2-6 months.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2">Do you work with startups?</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Absolutely! We love working with startups and offer flexible engagement models.
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2">Can you help with existing projects?</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Yes, we can audit, optimize, or enhance existing applications and systems.
-                  </p>
-                </div>
+              <CardContent className="space-y-2">
+                {faqs.map((faq, index) => (
+                  <div
+                    key={index}
+                    onMouseEnter={() => setHoveredFaqIndex(index)}
+                    onMouseLeave={() => setHoveredFaqIndex(null)}
+                    className="border-b border-border/50 py-3 transition-colors hover:border-primary/30"
+                  >
+                    <div className="flex items-center justify-between cursor-pointer">
+                      <h4 className="text-sm font-medium pr-4">{faq.question}</h4>
+                      <motion.div
+                        animate={{ rotate: hoveredFaqIndex === index ? 180 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ChevronDown className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                      </motion.div>
+                    </div>
+                    
+                    <AnimatePresence>
+                      {hoveredFaqIndex === index && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </motion.div>
