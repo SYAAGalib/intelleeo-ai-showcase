@@ -10,35 +10,35 @@ const STORAGE_KEYS = {
 const getDefaultTeam = (): TeamMember[] => [
   {
     id: '1',
-    name: 'John Doe',
+    name: 'Sheikh Yeasin Ahsanullah Al-Galib',
     position: 'CEO',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-    bio: 'Visionary leader with 15+ years in AI and technology innovation',
+    image: '/uploads/Team/Casual-Rupsa-River-SYAAGalib.svg',
+    bio: 'Visionary leader with years in AI and technology innovation',
     certificationId: 'CEO-001-2024',
     skills: ['Strategic Planning', 'AI Strategy', 'Business Development'],
-    email: 'john.doe@intelleeo.com',
+    email: 'galib@intelleeo.com',
     isCXO: true
   },
   {
     id: '2',
-    name: 'Jane Smith',
+    name: 'Md. Shefayet Hossain',
     position: 'CTO',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop',
+    image: '/uploads/Team/Casual-Rupsa-River-shefayer-2.svg',
     bio: 'Technical expert specializing in AI architecture and scalable solutions',
     certificationId: 'CTO-002-2024',
     skills: ['AI Architecture', 'Cloud Computing', 'Technical Leadership'],
-    email: 'jane.smith@intelleeo.com',
+    email: 'shefayet@intelleeo.com',
     isCXO: true
   },
   {
     id: '3',
-    name: 'Mike Johnson',
+    name: 'Aiman Al Mahmud',
     position: 'COO',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop',
+    image: '/uploads/Team/aiman-blue-jacker-casual.jpg',
     bio: 'Operations specialist ensuring seamless project delivery and client satisfaction',
     certificationId: 'COO-003-2024',
     skills: ['Operations Management', 'Project Delivery', 'Client Relations'],
-    email: 'mike.johnson@intelleeo.com',
+    email: 'aiman@intelleeo.com',
     isCXO: true
   },
   {
