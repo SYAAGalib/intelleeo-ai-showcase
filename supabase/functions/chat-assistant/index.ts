@@ -11,14 +11,122 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    const { messages, config } = await req.json();
+    
+    // Use external API if configured, otherwise fall back to Lovable AI
+    if (config?.apiKey && config?.provider !== 'lovable') {
+      let apiUrl: string;
+      let headers: Record<string, string>;
+      let body: any;
 
+      // Configure based on provider
+      switch (config.provider) {
+        case 'chatgpt':
+          apiUrl = 'https://api.openai.com/v1/chat/completions';
+          headers = {
+            'Authorization': `Bearer ${config.apiKey}`,
+            'Content-Type': 'application/json',
+          };
+          body = {
+            model: config.model || 'gpt-4o-mini',
+            messages: [
+              { role: 'system', content: config.systemPrompt },
+              ...messages
+            ],
+          };
+          break;
+
+        case 'grok':
+          apiUrl = 'https://api.x.ai/v1/chat/completions';
+          headers = {
+            'Authorization': `Bearer ${config.apiKey}`,
+            'Content-Type': 'application/json',
+          };
+          body = {
+            model: config.model || 'grok-2-mini',
+            messages: [
+              { role: 'system', content: config.systemPrompt },
+              ...messages
+            ],
+          };
+          break;
+
+        case 'deepseek':
+          apiUrl = 'https://api.deepseek.com/v1/chat/completions';
+          headers = {
+            'Authorization': `Bearer ${config.apiKey}`,
+            'Content-Type': 'application/json',
+          };
+          body = {
+            model: config.model || 'deepseek-chat',
+            messages: [
+              { role: 'system', content: config.systemPrompt },
+              ...messages
+            ],
+          };
+          break;
+
+        case 'gemini':
+          apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${config.model || 'gemini-2.0-flash-exp'}:generateContent?key=${config.apiKey}`;
+          headers = {
+            'Content-Type': 'application/json',
+          };
+          
+          // Convert messages to Gemini format
+          const geminiContents = messages.map((msg: any) => ({
+            role: msg.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: msg.content }]
+          }));
+          
+          body = {
+            system_instruction: {
+              parts: [{ text: config.systemPrompt }]
+            },
+            contents: geminiContents,
+          };
+          break;
+
+        default:
+          throw new Error('Unsupported provider');
+      }
+
+      console.log('Making request to:', config.provider);
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('AI API error:', response.status, errorText);
+        throw new Error(`AI API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('AI response received');
+
+      // Extract response based on provider
+      let aiResponse: string;
+      if (config.provider === 'gemini') {
+        aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response';
+      } else {
+        aiResponse = data.choices?.[0]?.message?.content || 'No response';
+      }
+
+      return new Response(
+        JSON.stringify({ response: aiResponse }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Fallback to Lovable AI
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY not configured");
     }
 
-    const systemPrompt = `You are a helpful AI assistant for intelleeo, an AI solutions company. 
+    const systemPrompt = config?.systemPrompt || `You are a helpful AI assistant for intelleeo, an AI solutions company. 
 You help visitors learn about intelleeo's services including:
 - AI/ML Development
 - Web and Mobile Applications

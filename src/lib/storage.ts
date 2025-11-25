@@ -7,6 +7,8 @@ const STORAGE_KEYS = {
   TECHNOLOGIES: 'admin_technologies',
   BLOGS: 'admin_blogs',
   AUTH: 'admin_auth',
+  CHAT_CONFIG: 'admin_chat_config',
+  SOCIAL_LINKS: 'admin_social_links',
 };
 
 // Blog Post interface
@@ -53,6 +55,20 @@ export interface ChatSummary {
   timestamp: string;
   messages: number;
   preview: string;
+}
+
+export interface ChatConfig {
+  provider: 'chatgpt' | 'grok' | 'deepseek' | 'gemini';
+  apiKey: string;
+  model: string;
+  systemPrompt: string;
+}
+
+export interface SocialLinks {
+  whatsapp: string;
+  messenger: string;
+  upwork: string;
+  telegram: string;
 }
 
 // Admin credentials
@@ -521,6 +537,34 @@ export const saveBlog = (blog: BlogPost) => {
 export const deleteBlog = (id: string) => {
   const blogs = getBlogs(true).filter(blog => blog.id !== id);
   setStorageData(STORAGE_KEYS.BLOGS, blogs);
+};
+
+// Chat configuration
+export const getChatConfig = (): ChatConfig => {
+  return getStorageData(STORAGE_KEYS.CHAT_CONFIG, {
+    provider: 'gemini',
+    apiKey: '',
+    model: 'gemini-pro',
+    systemPrompt: "You are a helpful AI assistant for intelleeo. Answer questions about AI solutions, software development, and technology.",
+  });
+};
+
+export const saveChatConfig = (config: ChatConfig) => {
+  setStorageData(STORAGE_KEYS.CHAT_CONFIG, config);
+};
+
+// Social media links
+export const getSocialLinks = (): SocialLinks => {
+  return getStorageData(STORAGE_KEYS.SOCIAL_LINKS, {
+    whatsapp: 'https://wa.me/8801946303020',
+    messenger: 'https://m.me/intelleeo',
+    upwork: 'https://upwork.com/freelancers/intelleeo',
+    telegram: 'https://t.me/intelleeo',
+  });
+};
+
+export const saveSocialLinks = (links: SocialLinks) => {
+  setStorageData(STORAGE_KEYS.SOCIAL_LINKS, links);
 };
 
 // Re-export from storage-team for convenience

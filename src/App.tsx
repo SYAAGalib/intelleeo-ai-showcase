@@ -26,6 +26,7 @@ import TechnologiesManager from "./pages/admin/TechnologiesManager";
 import BlogManager from "./pages/admin/BlogManager";
 import TeamManager from "./pages/admin/TeamManager";
 import MessagesManager from "./pages/admin/MessagesManager";
+import ChatSettingsManager from "./pages/admin/ChatSettingsManager";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const App = () => (
             <Route path="blog" element={<BlogManager />} />
             <Route path="team" element={<TeamManager />} />
             <Route path="messages" element={<MessagesManager />} />
+            <Route path="chat-settings" element={<ChatSettingsManager />} />
           </Route>
           
           {/* Catch-all route for 404 */}
