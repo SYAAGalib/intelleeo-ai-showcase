@@ -5,12 +5,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { saveChat } from '@/lib/storage';
+import { saveChat, getChatConfig } from '@/lib/storage';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
+
+const helpMessages = [
+  "How can I help you today?",
+  "Ask me about AI solutions...",
+  "Need help with your project?",
+  "Let's discuss your ideas!",
+  "What can I assist you with?",
+];
 
 export const FloatingChat = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +28,7 @@ export const FloatingChat = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentHelpIndex, setCurrentHelpIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,6 +36,15 @@ export const FloatingChat = () => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      const interval = setInterval(() => {
+        setCurrentHelpIndex((prev) => (prev + 1) % helpMessages.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [isOpen]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -37,12 +55,13 @@ export const FloatingChat = () => {
     setIsLoading(true);
 
     try {
-      // Dynamically import supabase client only when needed
+      const chatConfig = getChatConfig();
       const { supabase } = await import('@/integrations/supabase/client');
       
       const { data, error } = await supabase.functions.invoke('chat-assistant', {
         body: { 
-          messages: [...messages, { role: 'user', content: userMessage }]
+          messages: [...messages, { role: 'user', content: userMessage }],
+          config: chatConfig
         }
       });
 
@@ -64,7 +83,6 @@ export const FloatingChat = () => {
   };
 
   const handleClose = () => {
-    // Save chat summary
     const summary = {
       id: Date.now().toString(),
       timestamp: new Date().toISOString(),
@@ -82,48 +100,61 @@ export const FloatingChat = () => {
 
   return (
     <>
-      {/* Floating Button */}
       <AnimatePresence>
         {!isOpen && (
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            className="fixed bottom-6 right-6 z-50"
+            className="fixed bottom-6 left-6 z-50"
           >
-            <Button
-              size="lg"
-              className="rounded-full w-16 h-16 shadow-lg relative group"
-              onClick={() => setIsOpen(true)}
-            >
-              <MessageCircle className="w-6 h-6" />
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [1, 0.5, 1]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute -top-1 -right-1"
+            <div className="relative">
+              <Button
+                size="lg"
+                className="rounded-full w-16 h-16 shadow-lg relative group"
+                onClick={() => setIsOpen(true)}
               >
-                <Sparkles className="w-5 h-5 text-yellow-400" />
-              </motion.div>
-            </Button>
+                <MessageCircle className="w-6 h-6" />
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [1, 0.5, 1]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute -top-1 -right-1"
+                >
+                  <Sparkles className="w-5 h-5 text-yellow-400" />
+                </motion.div>
+              </Button>
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentHelpIndex}
+                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute bottom-full left-0 mb-2 px-4 py-2 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg whitespace-nowrap"
+                >
+                  <p className="text-sm text-foreground">{helpMessages[currentHelpIndex]}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ scale: 0.8, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.8, opacity: 0, y: 20 }}
-            className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)]"
+            className="fixed bottom-6 left-6 z-50 w-96 max-w-[calc(100vw-3rem)]"
           >
             <Card className="shadow-2xl">
               <CardHeader className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-4">
@@ -232,3 +263,4 @@ export const FloatingChat = () => {
     </>
   );
 };
+

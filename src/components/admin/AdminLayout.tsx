@@ -12,7 +12,8 @@ import {
   LogOut,
   Menu,
   Home,
-  BookOpen
+  BookOpen,
+  MessageSquare
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { isAdminAuthenticated, adminLogout } from '@/lib/storage';
@@ -59,6 +60,7 @@ const AdminLayout = () => {
     { icon: BookOpen, label: 'Blog', path: '/admin/blog' },
     { icon: Users, label: 'Team', path: '/admin/team' },
     { icon: Mail, label: 'Messages', path: '/admin/messages' },
+    { icon: MessageSquare, label: 'Chat & API', path: '/admin/chat-settings' },
   ];
 
   if (loading) {
