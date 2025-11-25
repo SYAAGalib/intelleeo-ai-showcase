@@ -226,6 +226,27 @@ const About = () => {
           </div>
         </motion.section>
 
+        {/* Team Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet Our Team</h2>
+            <p className="text-xl text-muted-foreground">
+              The talented individuals behind our success
+            </p>
+          </div>
+          <div className="text-center">
+            <Button size="lg" asChild>
+              <Link to="/team">View Full Team</Link>
+            </Button>
+          </div>
+        </motion.section>
+
         {/* Call to Action */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
