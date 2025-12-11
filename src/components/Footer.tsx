@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { NewsletterSignup } from './NewsletterSignup';
 
 export const Footer = () => {
   return (
@@ -52,31 +53,41 @@ export const Footer = () => {
             <h3 className="font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/blog/ai-development-services" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
+                  All Services
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
                   AI Development
                 </Link>
               </li>
               <li>
-                <Link to="/blog/web-application-development" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
                   Web Applications
                 </Link>
               </li>
               <li>
-                <Link to="/blog/mobile-app-development" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
                   Mobile Apps
                 </Link>
               </li>
-              <li>
-                <Link to="/blog/consulting-services" className="text-muted-foreground hover:text-primary transition-colors">
-                  Consulting
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors font-semibold">
-                  Blog
-                </Link>
-              </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Newsletter Section */}
+        <div className="border-t border-border mt-8 pt-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 className="font-semibold mb-1">Subscribe to our Newsletter</h3>
+              <p className="text-sm text-muted-foreground">
+                Get the latest updates on AI, tech insights, and project showcases.
+              </p>
+            </div>
+            <div className="w-full md:w-auto md:min-w-[320px]">
+              <NewsletterSignup />
+            </div>
           </div>
         </div>
 

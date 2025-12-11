@@ -15,6 +15,7 @@ import Technologies from "./pages/Technologies";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 import { ScrollToTop } from "./components/ScrollToTop";
+import Services from "./pages/Services";
 import AdminLogin from "./pages/admin/Login";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
@@ -27,6 +28,9 @@ import BlogManager from "./pages/admin/BlogManager";
 import TeamManager from "./pages/admin/TeamManager";
 import MessagesManager from "./pages/admin/MessagesManager";
 import ChatSettingsManager from "./pages/admin/ChatSettingsManager";
+import TestimonialsManager from "./pages/admin/TestimonialsManager";
+import ServicesManager from "./pages/admin/ServicesManager";
+import NewsletterManager from "./pages/admin/NewsletterManager";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +52,7 @@ const App = () => (
             <Route path="contact" element={<Contact />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<Blog />} />
+            <Route path="services" element={<Services />} />
             <Route path="projects/:slug" element={<ProjectDetail />} />
           </Route>
           
@@ -59,9 +64,12 @@ const App = () => (
             <Route path="about" element={<AboutEditor />} />
             <Route path="contact" element={<ContactEditor />} />
             <Route path="projects" element={<ProjectsManager />} />
+            <Route path="services" element={<ServicesManager />} />
             <Route path="technologies" element={<TechnologiesManager />} />
+            <Route path="testimonials" element={<TestimonialsManager />} />
             <Route path="blog" element={<BlogManager />} />
             <Route path="team" element={<TeamManager />} />
+            <Route path="newsletter" element={<NewsletterManager />} />
             <Route path="messages" element={<MessagesManager />} />
             <Route path="chat-settings" element={<ChatSettingsManager />} />
           </Route>

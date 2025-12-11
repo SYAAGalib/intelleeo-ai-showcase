@@ -13,7 +13,10 @@ import {
   Menu,
   Home,
   BookOpen,
-  MessageSquare
+  MessageSquare,
+  Star,
+  Briefcase,
+  Newspaper
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { isAdminAuthenticated, adminLogout } from '@/lib/storage';
@@ -56,9 +59,12 @@ const AdminLayout = () => {
     { icon: FileText, label: 'About Page', path: '/admin/about' },
     { icon: Mail, label: 'Contact Info', path: '/admin/contact' },
     { icon: FolderKanban, label: 'Projects', path: '/admin/projects' },
+    { icon: Briefcase, label: 'Services', path: '/admin/services' },
     { icon: Code, label: 'Technologies', path: '/admin/technologies' },
+    { icon: Star, label: 'Testimonials', path: '/admin/testimonials' },
     { icon: BookOpen, label: 'Blog', path: '/admin/blog' },
     { icon: Users, label: 'Team', path: '/admin/team' },
+    { icon: Newspaper, label: 'Newsletter', path: '/admin/newsletter' },
     { icon: Mail, label: 'Messages', path: '/admin/messages' },
     { icon: MessageSquare, label: 'Chat & API', path: '/admin/chat-settings' },
   ];

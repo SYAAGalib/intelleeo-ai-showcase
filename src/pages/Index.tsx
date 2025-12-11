@@ -3,6 +3,8 @@ import { HeroSection } from '@/components/HeroSection';
 import { ProjectCard } from '@/components/ProjectCard';
 import { TeamSection } from '@/components/TeamSection';
 import { FAQSection } from '@/components/FAQSection';
+import { TestimonialsSection } from '@/components/TestimonialsSection';
+import { SEOHead } from '@/components/SEOHead';
 import { projects } from '@/data/projects';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -11,8 +13,10 @@ import { Link } from 'react-router-dom';
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead />
+      
       {/* Hero Section */}
-        <HeroSection />
+      <HeroSection />
 
         {/* Projects Section */}
         <section id="projects" className="py-20 bg-gradient-to-b from-background to-muted/30">
@@ -56,6 +60,9 @@ const Index = () => {
             </motion.div>
           </div>
         </section>
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
 
       {/* Team Section */}
       <TeamSection />
