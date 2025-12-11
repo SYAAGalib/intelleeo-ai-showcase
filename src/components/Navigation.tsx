@@ -12,6 +12,7 @@ export const Navigation = () => {
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/devnest', label: 'DevNest' },
+    { href: '/services', label: 'Services' },
     { href: '/technologies', label: 'Technologies' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' }
