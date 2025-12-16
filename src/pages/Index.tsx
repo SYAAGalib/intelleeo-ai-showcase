@@ -4,6 +4,7 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { TeamSection } from '@/components/TeamSection';
 import { FAQSection } from '@/components/FAQSection';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
+import { AnimatedStats } from '@/components/AnimatedStats';
 import { SEOHead } from '@/components/SEOHead';
 import { SectionReveal } from '@/components/SectionReveal';
 import { projects } from '@/data/projects';
@@ -11,13 +12,28 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const faqItems = [
+  { question: "What services does intelleeo offer?", answer: "intelleeo offers AI/ML development, web and mobile application development, custom AI solutions, and consulting services to help businesses leverage artificial intelligence effectively." },
+  { question: "How long does a typical project take?", answer: "Project timelines vary based on complexity. Simple projects may take 2-4 weeks, while complex AI solutions can take 2-6 months. We provide detailed timelines during our initial consultation." },
+  { question: "What industries does intelleeo work with?", answer: "We work across various industries including healthcare, finance, e-commerce, education, and technology startups, bringing AI solutions tailored to each sector's unique needs." },
+  { question: "How can I get started with intelleeo?", answer: "Simply contact us through our website or email at intelleeo.inteligence@gmail.com. We'll schedule a free consultation to discuss your project requirements and propose a solution." },
+];
+
 const Index = () => {
   return (
     <div className="min-h-screen overflow-hidden">
-      <SEOHead />
+      <SEOHead 
+        faqItems={faqItems}
+        breadcrumbs={[
+          { name: 'Home', url: 'https://intelleeo.com' }
+        ]}
+      />
       
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Animated Stats Section */}
+      <AnimatedStats />
 
       {/* Projects Section */}
       <section id="projects" className="py-20 bg-gradient-to-b from-background to-muted/30">

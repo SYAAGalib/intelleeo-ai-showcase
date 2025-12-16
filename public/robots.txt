@@ -1,7 +1,19 @@
+# intelleeo - AI Software Studio
+# https://intelleeo.com
+
+# Allow all major search engines
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
 Allow: /
 
 User-agent: Twitterbot
@@ -10,5 +22,20 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
+# Allow all other bots
 User-agent: *
 Allow: /
+Crawl-delay: 2
+
+# Block admin pages from indexing
+Disallow: /admin/
+Disallow: /admin/*
+
+# Sitemap location
+Sitemap: https://intelleeo.com/sitemap.xml
+
+# Host
+Host: https://intelleeo.com
