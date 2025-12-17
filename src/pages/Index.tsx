@@ -5,6 +5,7 @@ import { TeamSection } from '@/components/TeamSection';
 import { FAQSection } from '@/components/FAQSection';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { AnimatedStats } from '@/components/AnimatedStats';
+import { BlogSection } from '@/components/BlogSection';
 import { SEOHead } from '@/components/SEOHead';
 import { SectionReveal } from '@/components/SectionReveal';
 import { projects } from '@/data/projects';
@@ -68,6 +69,9 @@ const Index = () => {
 
       {/* Testimonials Section */}
       <TestimonialsSection />
+
+      {/* Blog Section */}
+      <BlogSection />
 
       {/* Team Section */}
       <TeamSection />
